@@ -12,7 +12,7 @@ import java.io.IOException;
 
 /**
  *
- * @author upgra
+ * @author 23424
  */
 public class CAS23234 {
 
@@ -21,29 +21,30 @@ public class CAS23234 {
      */
     public static void main(String[] args) {
             try {
-            // Создаем объект BufferedReader для чтения из файла "students.txt"
+            // Create a BufferedReader object to read from the "students.txt" file
             BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
-            // Создаем объект BufferedWriter для записи в файл "status.txt"
+            // Create a BufferedWriter object to write to the "status.txt" fi1e
             BufferedWriter writer = new BufferedWriter(new FileWriter("status.txt"));
             String line;
-            // Читаем файл построчно
+            // Read the file line by line
             while ((line = reader.readLine()) != null) {
-                // Разделяем строку на имя и фамилию
+                // Split the string into first and last name
                 String[] nameParts = line.split(" ");
                 String firstName = nameParts[0];
                 String secondName = nameParts[1];
-                // Читаем количество классов и номер студента
+                // Read the number of classes and student number
                 int classes = Integer.parseInt(reader.readLine());
                 String studentNumber = reader.readLine();
 
-                // Проверяем валидность данных
-                if (!firstName.matches("[a-zA-Z]+") || !secondName.matches("[a-zA-Z0-9]+") || classes < 1 || classes > 8 || !studentNumber.matches("\\d{2}[a-zA-Z]+\\d+")) {
-                    // Выводим сообщение об ошибке, если данные невалидны
+                // Checking data validity
+                if (!firstName.matches("[a-zA-Z]+") || !secondName.matches("[a-zA-Z0-9]+") || 
+                        classes < 1 || classes > 8 || !studentNumber.matches("\\d{2}[a-zA-Z]+\\d+")) {
+                    // Display an error message if the data is invalid
                     System.out.println("Invalid data for student " + firstName + " " + secondName);
                     continue;
                 }
 
-                // Определяем нагрузку студента в зависимости от количества классов
+                // Determine the student load depending on the number of classes
                 String workload;
                 if (classes == 1) {
                     workload = "very light";
@@ -55,14 +56,14 @@ public class CAS23234 {
                     workload = "full time";
                 }
 
-                // Записываем данные в файл "status.txt"
+                // Write to the "status.txt"
                 writer.write(studentNumber + " - " + secondName + "\n" + workload + "\n\n");
             }
-            // Закрываем потоки чтения и записи
+            // Close read and write
             reader.close();
             writer.close();
         } catch (IOException e) {
-            // Обрабатываем исключение ввода-вывода
+            // Handle I/O exception
             e.printStackTrace();
         }
     }
